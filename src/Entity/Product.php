@@ -104,7 +104,7 @@ class Product implements TaggableInterface
         return $this->tagsText;
     }
 
-    public function getTsCreate(): ?DateTime {
+    public function getTsCreate(): ?string {
         return $this->tsCreate->format('Y-m-d H:i:s');
     }
 
