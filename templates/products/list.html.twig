@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}sf4 Products{% endblock %}
+
+{% block body %}
+    {% if products %}
+        <input class="mb-3" type="text" id="productSearch" placeholder="Search by TAGs...">
+        <div class="table-responsive container">
+        <table id="products" class="table table-hover">
+            <thead class="">
+                <tr class="row">
+                    <th class="col-2">Created</th>
+                    <th class="col">Name</th>
+                    <th class="text-right col-2"></th>
+                    <th class="text-right col-2"></th>
+                </tr>
+            </thead>
+            <tbody class="filterProduct">
+                {% for product in products %}
+                    <tr class="row" data-tag="{% for tag in product.tags %}{{ tag }} {% endfor %}">
+                        <td class="text-left ts-12px col-2">{{ product.tsCreate }}</td>
+                        <td class="col"><a href="/product/{{ product.id }}">{{ product.name }}</a></td>
+                        <td class="col-2">{% if vich_uploader_asset(product, 'imageFile') %}<a href="/product/{{ product.id }}/edit"><img class="img-thumbnail float-right" style="max-width:160px; max-height:100px;" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="Image not available"/></a>{% endif %}</td>
+                        <td class="text-right col-2">
+                            <a href="/product/{{ product.id }}/edit" class="btn btn-outline-primary">Edit</a>
+                            <a href="#" class="btn btn-outline-danger" data-action="delete-product" data-id="{{ product.id }}" data-name="{{ product.name }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% else %}
+        <div class="w-100 text-center">
+        <h1>Yet No Products!</h1>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/js/main.js') }}"></script>
+{% endblock %}

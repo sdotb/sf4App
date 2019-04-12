@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}sf4 Product{% endblock %}
+
+{% block body %}
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <img class="img-fluid" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
+    <hr>
+    <a class="mx-2" href="/product/list">Back to List</a>|<a class="mx-2" href="/product/{{ product.id }}/edit">Edit Product</a>
+{% endblock %}
